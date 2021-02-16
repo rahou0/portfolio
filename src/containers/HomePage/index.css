@@ -1,0 +1,9 @@
+#iconStyle {
+  width: 15px;
+  height: 15px;
+  color: #fff;
+  cursor: pointer;
+}
+#iconStyle:hover {
+  color: #fdcd73;
+}
