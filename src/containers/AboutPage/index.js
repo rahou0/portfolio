@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import AboutImageProfile from "../../images/about.svg";
 import { Marginer } from "../../components/marginer";
@@ -7,6 +8,7 @@ import PageTitle from "../../components/PageTitle";
 import Description from "../../components/Description";
 import { deviceSize } from "../../components/responsive";
 import { useMediaQuery } from "react-responsive";
+import { useTranslation } from "react-i18next";
 
 const PageContainer = styled.div`
   width: 100vw;
@@ -73,10 +75,21 @@ const SkillsName = styled.h4`
   cursor: pointer;
 `;
 function AboutPage() {
+  const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
-
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1));
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [location]);
   return (
-    <PageContainer>
+    <PageContainer id="about">
       <AboutPageContainer
         pleft={isMobile ? 30 : 250}
         pright={isMobile ? 30 : 0}
@@ -89,23 +102,22 @@ function AboutPage() {
           )}
           {!isMobile && <Marginer direction="horizontal" margin={100} />}
           <TextContentContainer>
-            <PageTitle font={isMobile ? 25 : 30}>─ About Me </PageTitle>
+            <PageTitle font={isMobile ? 25 : 30}>
+              ─ {t("aboutTitle")}
+            </PageTitle>
             <Marginer direction="vertical" margin={isMobile ? 15 : 30} />
             <Description color={"8B8EB3"}>
-              I'm a final year student pursuing master's in Software engineer 🎓
-              from Farhat abbas University of algeria 🏛. I'm a passionate
-              learner who's always willing to learn and work across technologies
-              and domains 💡.
+              {t("AboutDescriptionP1")}
             </Description>
             <Marginer direction="vertical" margin={isMobile ? 15 : 35} />
 
             <Description color={"8B8EB3"}>
-              I'm a Full-Stack Developer. Let's make something special.
+              {t("AboutDescriptionP2")}
             </Description>
             <Marginer direction="vertical" margin={isMobile ? 35 : 70} />
             <ButtonContainer>
               <Button padding={"10px 15px"} width={100} font={14} weight={500}>
-                HIRE ME
+                {t("hireMe")}
               </Button>
               <Marginer direction="horizontal" margin={40} />
               <Button padding={"10px 15px"} width={100} font={14} weight={900}>
@@ -127,22 +139,22 @@ function AboutPage() {
             font={isMobile ? 25 : 30}
             mtop={isMobile ? 1 : 0}
           >
-            ── My Skills
+            ── {t("skillsTitle")}
           </SkillsTitle>
           <SkillsContainer>
-            <SkillsName>Data Base Administartor</SkillsName>
-            <Description color={"FDCD73"}>SQL & NOSQL Data Bases</Description>
+            <SkillsName>{t("skill1Name")}</SkillsName>
+            <Description color={"FDCD73"}>{t("skill1Description")}</Description>
             <Marginer direction="vertical" margin={isMobile ? 10 : 40} />
-            <SkillsName>Mobile Developer</SkillsName>
-            <Description color={"FDCD73"}>Flutter, JAVA</Description>
+            <SkillsName>{t("skill2Name")}</SkillsName>
+            <Description color={"FDCD73"}>{t("skill2Description")}</Description>
           </SkillsContainer>
           <Marginer direction="horizontal" margin={isMobile ? 1 : 200} />
           <SkillsContainer>
-            <SkillsName>Software Developer</SkillsName>
-            <Description color={"FDCD73"}>JAVA, Python, C#</Description>
+            <SkillsName>{t("skill3Name")}</SkillsName>
+            <Description color={"FDCD73"}>{t("skill3Description")}</Description>
             <Marginer direction="vertical" margin={isMobile ? 10 : 40} />
-            <SkillsName>Full-Stack Developer</SkillsName>
-            <Description color={"FDCD73"}>ReactJs, NodeJs</Description>
+            <SkillsName>{t("skill4Name")}</SkillsName>
+            <Description color={"FDCD73"}>{t("skill4Description")}</Description>
           </SkillsContainer>
         </BottomContainer>
       </AboutPageContainer>

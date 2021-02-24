@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Description from "../../components/Description";
 import { useMediaQuery } from "react-responsive";
 import { deviceSize } from "../../components/responsive";
 import ContactFormCard from "../../components/ContactFormCard";
 import BottomContainer from "./BottomContainer";
+import { useTranslation } from "react-i18next";
 
 const PageContainer = styled.div`
   width: 100vw;
@@ -54,9 +56,20 @@ const ArrowLine = styled.a`
 `;
 function ContactPage() {
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
-
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1));
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [location]);
+  const { t, i18n } = useTranslation();
   return (
-    <PageContainer>
+    <PageContainer id="contact">
       <ContactPageContainer>
         <UpperContainer>
           <TextContainer pleft={isMobile ? 50 : ""}>
@@ -68,8 +81,7 @@ function ContactPage() {
               color={"8B8EB3"}
               opacity={1}
             >
-              Let's make something new, different and more meaningful or make
-              thing more visual or Conceptual ?{" "}
+              {t("contactSlogan")}
               <Description
                 init={{ x: "-20px", opacity: 0 }}
                 trans={{ duration: 1 }}
@@ -78,7 +90,7 @@ function ContactPage() {
                 color={"fdcd73"}
                 opacity={1}
               >
-                Just Say Hello !
+                {t("sayHello")}
               </Description>
             </Description>
           </TextContainer>
@@ -97,9 +109,9 @@ function ContactPage() {
         <BottomContainer isMobile={isMobile} />
         <FooterContainer>
           <Description font={isMobile ? 12 : ""} color={"fff"}>
-            ABDERAHIM HAMANI{" "}
+          {t("firstname")} {t("lastname")} 
             <Description color={"FDCD73"} font={12}>
-              &copy; {new Date().getFullYear()}
+               &copy; {new Date().getFullYear()}
             </Description>
           </Description>
         </FooterContainer>

@@ -5,6 +5,7 @@ import { deviceSize } from "../../components/responsive";
 import Button from "../Button";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useTranslation } from "react-i18next";
 
 const Card = styled(motion.div)`
   display: flex;
@@ -78,6 +79,8 @@ const FormVariants = {
   visible: { y: 0, opacity: 0.7 },
 };
 function ContactFormCard() {
+  const { t, i18n } = useTranslation();
+
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
   const controls = useAnimation();
   const { ref, inView } = useInView();
@@ -95,7 +98,7 @@ function ContactFormCard() {
       variants={itemVariants}
     >
       <motion.input
-        placeholder="Your Name"
+        placeholder={t("contactName")}
         initial="hidden"
         animate="visible"
         variants={FormVariants}
@@ -107,21 +110,21 @@ function ContactFormCard() {
         variants={FormVariants}
         transition={{ duration: 1, delay: 0.4 }}
         type="email"
-        placeholder="Mail Address"
+        placeholder={t("contactEmail")}
       ></motion.input>
       <motion.input
         initial="hidden"
         animate="visible"
         variants={FormVariants}
         transition={{ duration: 1, delay: 0.6 }}
-        placeholder="Your Budget Optional)"
+        placeholder={t("contactBudget")}
       ></motion.input>
       <motion.textarea
         initial="hidden"
         animate="visible"
         variants={FormVariants}
         transition={{ duration: 1, delay: 0.8 }}
-        placeholder="Project Description"
+        placeholder={t("contactDescription")}
       ></motion.textarea>
       <ButtonContainer>
         <Button
@@ -132,7 +135,7 @@ function ContactFormCard() {
           weight={500}
           font={14}
         >
-          HIRE ME
+          {t("hireMe")}
         </Button>
       </ButtonContainer>
     </Card>

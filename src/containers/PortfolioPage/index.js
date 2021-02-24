@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
@@ -9,6 +10,8 @@ import WebImage from "../../images/alphaLearn.png";
 import MobileImage from "../../images/web.jpg";
 import { deviceSize } from "../../components/responsive";
 import { useMediaQuery } from "react-responsive";
+import { useTranslation } from "react-i18next";
+
 const PageContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
@@ -40,19 +43,31 @@ const LinkItem = styled.a`
   cursor: pointer;
 `;
 function PortfolioPage() {
+  const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1));
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [location]);
   return (
-    <PageContainer>
+    <PageContainer id="portfolio">
       <PortfolioPageContainer padding={isMobile ? " 1" : ""}>
-        <PageTitle font={isMobile ? 25 : 30}>Featured Works</PageTitle>
+        <PageTitle font={isMobile ? 25 : 30}>{t("portfolioTitle")}</PageTitle>
         <Marginer direction="vertical" margin={5} />
-        <Description>bla bla bla bla </Description>
+        <Description>{t("portfolioDescription")} </Description>
         <Marginer direction="vertical" margin={40} />
         <HeaderContainer>
-          <LinkItem color={"FDCD73"}>All</LinkItem>
-          <LinkItem style={{ cursor: "pointer" }}>Web app</LinkItem>
-          <LinkItem>Desktop app</LinkItem>
-          <LinkItem>Mobile app</LinkItem>
+          <LinkItem color={"FDCD73"}>{t("all")}</LinkItem>
+          <LinkItem style={{ cursor: "pointer" }}>{t("web")}</LinkItem>
+          <LinkItem>{t("desktop")}</LinkItem>
+          <LinkItem>{t("mobile")}</LinkItem>
         </HeaderContainer>
         <Marginer direction="vertical" margin={40} />
         <CardWorkContainer justify={isMobile ? "center" : "start"}>
@@ -70,7 +85,7 @@ function PortfolioPage() {
         <Marginer direction="vertical" margin={40} />
 
         <Button weight={600} font={16}>
-          See More
+          {t("seeMore")}
         </Button>
       </PortfolioPageContainer>
     </PageContainer>

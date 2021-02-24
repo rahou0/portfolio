@@ -1,4 +1,5 @@
 {
+  "homepage": "http://rahou0.github.io/portfolio",
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
@@ -7,9 +8,12 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
     "axios": "^0.21.1",
+    "fontsource-roboto": "^4.0.0",
     "framer-motion": "^3.3.0",
+    "i18next": "^19.8.9",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-i18next": "^11.8.7",
     "react-icons": "^4.2.0",
     "react-intersection-observer": "^8.31.0",
     "react-responsive": "^8.2.0",
@@ -19,6 +23,8 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -41,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }

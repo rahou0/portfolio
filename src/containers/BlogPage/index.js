@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { deviceSize } from "../../components/responsive";
 import { useMediaQuery } from "react-responsive";
@@ -7,6 +8,7 @@ import { Marginer } from "../../components/marginer";
 import PageTitle from "../../components/PageTitle";
 import BlogCard from "../../components/BlogCard";
 import WebImage from "../../images/family.jpg";
+import { useTranslation } from "react-i18next";
 
 const PageContainer = styled.div`
   width: 100vw;
@@ -30,13 +32,26 @@ const CardContainer = styled.div`
   justify-content: center;
 `;
 function BlogPage() {
+  const { t, i18n } = useTranslation();
+
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1));
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [location]);
   return (
-    <PageContainer>
+    <PageContainer id="blog">
       <BlogPageContainer padding={isMobile ? " 1" : ""}>
-        <PageTitle font={isMobile ? 25 : 30}>My Blog</PageTitle>
+        <PageTitle font={isMobile ? 25 : 30}>{t("blogTitle")}</PageTitle>
         <Marginer direction="vertical" margin={5} />
-        <Description>bla bla bla bla </Description>
+        <Description>{t("blogDescription")}</Description>
         <Marginer direction="vertical" margin={40} />
         <CardContainer>
           <BlogCard

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+
 const Text = styled(motion.a)`
   color: ${({ color }) => (color ? "#" + color : "#fdcd73")};
   font-weight: ${({ weight }) => (weight ? weight : "400")};
@@ -10,7 +12,6 @@ const Text = styled(motion.a)`
   bottom: 0;
   margin-bottom: 100px;
   text-align: start;
-  margin-right: 10px;
   margin-bottom: ${({ mbottom }) => (mbottom ? mbottom + "px" : "")};
   margin-right: ${({ mright }) => (mright ? mright + "px" : "")};
   transform: rotate(90deg);
@@ -18,6 +19,7 @@ const Text = styled(motion.a)`
 `;
 function ScrollDownArrow(props) {
   const { color, weight, font, mright, mbottom } = props;
+  const { t, i18n } = useTranslation();
   return (
     <Text
       color={color}
@@ -29,7 +31,7 @@ function ScrollDownArrow(props) {
       animate={{ opacity: 1 }}
       transition={{ delay: 2.9 }}
     >
-      SCROLL DOWN ⟶
+      {t("scrollDown")} ⟶
     </Text>
   );
 }

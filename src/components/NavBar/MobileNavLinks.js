@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MenuToggle } from "./MenuToggle";
 import { Marginer } from "../../components/marginer";
-
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 const NavLinksContainer = styled.div`
   display: flex;
   align-items: center;
@@ -33,7 +34,7 @@ const LinkItem = styled.li`
   font-size: ${({ font }) => (font ? font + "px" : "20px")};
   display: flex;
 `;
-const Link = styled.a`
+const LinkName = styled(Link)`
   text-decoration: none;
   color: inherit;
   font-size: inherit;
@@ -59,37 +60,38 @@ function MobileNavLinks() {
     if (isOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "unset";
   }, [isOpen]);
+  const { t, i18n } = useTranslation();
+
   return (
     <NavLinksContainer>
       <MenuToggle isOpen={isOpen} toggle={() => SetOpen(!isOpen)} />
       {isOpen && (
         <LinkWrapper>
           <LinkItem>
-            <Link href="#">Home</Link>
+            <LinkName onClick={() => SetOpen(!isOpen)} to="/#">
+              {t("home")}
+            </LinkName>
           </LinkItem>
           <LinkItem>
-            <Link href="#">ABOUT</Link>
+            <LinkName onClick={() => SetOpen(!isOpen)} to="/#about">
+              {t("about")}
+            </LinkName>
           </LinkItem>
           <LinkItem>
-            <Link href="#">PORTFOLIO</Link>
-          </LinkItem>{" "}
+            <LinkName onClick={() => SetOpen(!isOpen)} to="/#portfolio">
+              {t("portfolio")}
+            </LinkName>
+          </LinkItem>
           <LinkItem>
-            <Link href="#">BLOG</Link>
-          </LinkItem>{" "}
+            <LinkName onClick={() => SetOpen(!isOpen)} to="/#blog">
+              {t("blog")}
+            </LinkName>
+          </LinkItem>
           <LinkItem>
-            <Link href="#">CONTACT</Link>
-          </LinkItem>{" "}
-          <LinkLangWrapper>
-            <LinkItem font={14}>
-              <Link href="#">ARA</Link>
-            </LinkItem>
-            <LinkItem font={14}>
-              <Link href="#">FRA</Link>
-            </LinkItem>
-            <LinkItem font={14}>
-              <Link href="#">ENG</Link>
-            </LinkItem>
-          </LinkLangWrapper>
+            <LinkName onClick={() => SetOpen(!isOpen)} to="/#contact">
+              {t("contact")}
+            </LinkName>
+          </LinkItem>
         </LinkWrapper>
       )}
     </NavLinksContainer>

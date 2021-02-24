@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import "./index.css";
 import { Marginer } from "../../components/marginer";
+import { useTranslation } from "react-i18next";
 import {
   FiTwitter,
   FiFacebook,
@@ -15,7 +16,6 @@ import { useMediaQuery } from "react-responsive";
 import { deviceSize } from "../../components/responsive";
 import PageTitle from "../../components/PageTitle";
 import Button from "../../components/Button";
-import Description from "../../components/Description";
 import ScrollDownArrow from "../../components/ScrollDownArrow";
 const PageContainer = styled.div`
   width: 100vw;
@@ -52,6 +52,7 @@ const IconContainer = styled(motion.div)`
 `;
 function HomePage() {
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
+  const { t, i18n } = useTranslation();
   return (
     <PageContainer>
       <HomePageContainer pleft={isMobile ? 40 : 250}>
@@ -72,7 +73,7 @@ function HomePage() {
             weight={500}
             color={"FDCD73"}
           >
-            HELLO
+            {t("hello")}
           </PageTitle>
         </HelloContainer>
         <TitleContainer>
@@ -82,15 +83,14 @@ function HomePage() {
             init={{ y: "30vh", opacity: 0 }}
             trans={{ duration: 1, delay: 1.5 }}
           >
-            I'm
+            {t("im")}
           </PageTitle>
           <PageTitle
             init={{ y: "30vh", opacity: 0 }}
             trans={{ duration: 1, delay: 1.5 }}
             font={isMobile ? 25 : 60}
           >
-            {" "}
-            Abderahim{" "}
+            {t("firstname")}
           </PageTitle>
           <PageTitle
             init={{ y: "30vh", opacity: 0 }}
@@ -98,7 +98,7 @@ function HomePage() {
             font={isMobile ? 25 : 60}
             color={"fff"}
           >
-            Hamani
+            {t("lastname")}
           </PageTitle>
         </TitleContainer>
         <PageTitle
@@ -108,7 +108,7 @@ function HomePage() {
           init={{ y: "-6vh", opacity: 0 }}
           trans={{ duration: 0.5, delay: 2.3 }}
         >
-          I'm a full-stack web developer.
+          {t("jobtitle")}
         </PageTitle>
 
         {!isMobile && (
@@ -123,7 +123,7 @@ function HomePage() {
           init={{ opacity: 0 }}
           trans={{ delay: 2.9 }}
         >
-          DOWNLOAD CV
+          {t("cvButtonName")}
         </Button>
         <IconContainer
           mleft={isMobile ? 20 : 60}

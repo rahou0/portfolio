@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 const NavLinksContainer = styled.div`
   display: flex;
   align-items: center;
@@ -21,7 +24,7 @@ const LinkItem = styled.li`
   align-items: center;
   justify-content: center;
 `;
-const Link = styled.a`
+const LinkName = styled(Link)`
   text-decoration: none;
   color: inherit;
   font-size: inherit;
@@ -39,24 +42,26 @@ const Link = styled.a`
   }
 `;
 function NavLinks() {
+  const { t, i18n } = useTranslation();
+
   return (
     <NavLinksContainer>
       <LinkWrapper>
         <LinkItem>
-          <Link href="#">Home</Link>
+          <LinkName to="/#">{t("home")}</LinkName>
         </LinkItem>
         <LinkItem>
-          <Link href="#">ABOUT</Link>
+          <LinkName to="/#about">{t("about")}</LinkName>
         </LinkItem>
         <LinkItem>
-          <Link href="#">PORTFOLIO</Link>
-        </LinkItem>{" "}
+          <LinkName to="/#portfolio">{t("portfolio")}</LinkName>
+        </LinkItem>
         <LinkItem>
-          <Link href="#">BLOG</Link>
-        </LinkItem>{" "}
+          <LinkName to="/#blog">{t("blog")}</LinkName>
+        </LinkItem>
         <LinkItem>
-          <Link href="#">CONTACT</Link>
-        </LinkItem>{" "}
+          <LinkName to="/#contact">{t("contact")}</LinkName>
+        </LinkItem>
       </LinkWrapper>
     </NavLinksContainer>
   );

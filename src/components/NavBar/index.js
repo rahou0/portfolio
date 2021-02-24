@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import { deviceSize } from "../responsive";
 import NavLinks from "./NavLinks";
 import MobileNavLinks from "./MobileNavLinks";
-
+import i18n from "../../i18n";
 const NavBarContainer = styled.div`
   width: 100vw;
   margin: 0;
@@ -13,10 +13,10 @@ const NavBarContainer = styled.div`
   overflow: hidden;
   max-width: 100%;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  position: absolute;
+  position: fixed;
   min-height: 60px;
   background-color: #191d28;
-  z-index: 2;
+  z-index: 999;
   transition: "top 0.6s";
 `;
 const MenuContainer = styled.div`
@@ -59,8 +59,16 @@ const Title = styled.h2`
   color: ${({ color }) => (color ? "#" + color : "#fff")};
   padding-right: 20px;
 `;
+
 function NavBar() {
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
+  const [activeLang, setActiveLang] = useState("en");
+  const changeLanguage = (ln) => {
+    return () => {
+      i18n.changeLanguage(ln);
+      setActiveLang(ln);
+    };
+  };
   return (
     <NavBarContainer>
       <MenuContainer padding={isMobile ? 30 : ""}>
@@ -70,9 +78,24 @@ function NavBar() {
 
         {!isMobile && (
           <MiddleNavBarContainer>
-            <ItemNavBar>AR</ItemNavBar>
-            <ItemNavBar>FRA</ItemNavBar>
-            <ItemNavBar color={"FDCD73"}>ENG</ItemNavBar>
+            <ItemNavBar
+              onClick={changeLanguage("ar")}
+              color={activeLang === "ar" ? "FDCD73" : ""}
+            >
+              AR
+            </ItemNavBar>
+            <ItemNavBar
+              onClick={changeLanguage("fr")}
+              color={activeLang === "fr" ? "FDCD73" : ""}
+            >
+              FRA
+            </ItemNavBar>
+            <ItemNavBar
+              onClick={changeLanguage("en")}
+              color={activeLang === "en" ? "FDCD73" : ""}
+            >
+              ENG
+            </ItemNavBar>
           </MiddleNavBarContainer>
         )}
       </MenuContainer>
