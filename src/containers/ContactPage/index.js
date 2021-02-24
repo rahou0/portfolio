@@ -23,10 +23,7 @@ const ContactPageContainer = styled.div`
 `;
 const UpperContainer = styled.div`
   background-color: #161922;
-  height: 200px;
-  margin: ${({ margin }) => (margin ? "0px " + margin + "px" : "0px 230px")};
-  padding: ${({ padding }) =>
-    padding ? "0px " + padding + "px" : "0px 230px"};
+  height: ${({ height }) => (height ? "10px" : "200px")};
   padding-top: 130px;
   display: flex;
   justify-content: flex-start;
@@ -56,11 +53,14 @@ function ContactPage() {
   return (
     <PageContainer id="contact">
       <ContactPageContainer>
-        <UpperContainer></UpperContainer>
+        <UpperContainer
+          height={isMobile ? 12 : ""}
+          color={"fff"}
+        ></UpperContainer>
         <ContactFormCard />
         <BottomContainer isMobile={isMobile} />
         <FooterContainer>
-          <Description font={isMobile ? 12 : ""} color={"fff"}>
+          <Description font={isMobile ? 12 : null} color={"fff"}>
             {t("firstname")} {t("lastname")}
             <Description color={"FDCD73"} font={12}>
               &copy; {new Date().getFullYear()}
