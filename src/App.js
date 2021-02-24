@@ -8,6 +8,8 @@ import PortfolioPage from "./containers/PortfolioPage";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SayHelloPage from "./containers/SayHelloPage";
+import EducationPage from "./containers/EducationPage";
 function App() {
   const { t, i18n } = useTranslation();
   document.body.dir = i18n.dir();
@@ -21,6 +23,8 @@ function App() {
             <HomePage />
             <AboutPage />
             <PortfolioPage />
+            <SayHelloPage />
+            <EducationPage />
             <BlogPage />
             <ContactPage />
           </Route>

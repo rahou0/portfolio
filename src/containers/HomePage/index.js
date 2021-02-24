@@ -22,18 +22,17 @@ const PageContainer = styled.div`
   height: 100vh;
   max-width: 100%;
   max-height: 100%;
-  position: relative;
 `;
 const HomePageContainer = styled.div`
   display: flex;
   height: 100%;
-  padding: ${({ padding }) => (padding ? "0 "+padding + "px" : "0 250px")};
-  padding-left: ${({ pleft }) => (pleft ? pleft + "px" : "250px")};
+  padding: ${({ padding }) => (padding ? "0 " + padding + "px" : "0 250px")};
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
   background-color: #191d28;
   text-align: start;
+  position: relative;
 `;
 
 const TitleContainer = styled.div`
@@ -49,14 +48,15 @@ const IconContainer = styled(motion.div)`
   bottom: 0;
   margin-bottom: ${({ mbottom }) => (mbottom ? mbottom + "px" : "")};
   margin-left: ${({ mleft }) => (mleft ? mleft + "px" : "")};
-  left: 0;
+  right: ${({ lang }) => (lang === "ar" ? 1 : 100)};
+  left: ${({ lang }) => (lang === "ar" ? 100 : 0)};
 `;
 function HomePage() {
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
   const { t, i18n } = useTranslation();
   return (
     <PageContainer>
-      <HomePageContainer pleft={isMobile ? 40 : 250}>
+      <HomePageContainer padding={isMobile ? 40 : 250}>
         <HelloContainer>
           <PageTitle
             trans={{ duration: 1, delay: 0.5 }}
@@ -119,7 +119,7 @@ function HomePage() {
         <Button
           raduis={3}
           weight={500}
-          width={isMobile ? 110 : 150}
+          width={isMobile ? 150 : 150}
           padding={isMobile ? " 10px 6px" : "13px 20px"}
           init={{ opacity: 0 }}
           trans={{ delay: 2.9 }}
@@ -127,6 +127,7 @@ function HomePage() {
           {t("cvButtonName")}
         </Button>
         <IconContainer
+          lang={i18n.language}
           mleft={isMobile ? 20 : 60}
           mbottom={isMobile ? 20 : 50}
           initial={{ opacity: 0 }}

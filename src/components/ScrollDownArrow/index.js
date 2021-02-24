@@ -8,7 +8,8 @@ const Text = styled(motion.a)`
   font-weight: ${({ weight }) => (weight ? weight : "400")};
   font-size: ${({ font }) => (font ? font + "px" : "20px")};
   position: absolute;
-  right: 0;
+  right: ${({ lang }) => (lang === "ar" ? 100 : 0)};
+  left: ${({ lang }) => (lang === "ar" ? 0 : 100)};
   bottom: 0;
   margin-bottom: 100px;
   text-align: start;
@@ -20,8 +21,10 @@ const Text = styled(motion.a)`
 function ScrollDownArrow(props) {
   const { color, weight, font, mright, mbottom } = props;
   const { t, i18n } = useTranslation();
+  console.log(i18n.language);
   return (
     <Text
+      lang={i18n.language}
       color={color}
       font={font}
       weight={weight}

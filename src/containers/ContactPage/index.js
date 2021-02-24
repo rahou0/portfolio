@@ -19,24 +19,18 @@ const ContactPageContainer = styled.div`
   height: 100%;
   flex-direction: column;
   align-items: center;
-  flex-direction: column;
   position: relative;
 `;
 const UpperContainer = styled.div`
   background-color: #161922;
-  height: 30%;
+  height: 200px;
   margin: ${({ margin }) => (margin ? "0px " + margin + "px" : "0px 230px")};
-  width: 100%;
+  padding: ${({ padding }) =>
+    padding ? "0px " + padding + "px" : "0px 230px"};
   padding-top: 130px;
   display: flex;
   justify-content: flex-start;
 `;
-const TextContainer = styled.div`
-  max-width: 300px;
-  padding-left: ${({ pleft }) => (pleft ? pleft + "px" : "230px")};
-  margin-bottom: 20px;
-`;
-
 const FooterContainer = styled.div`
   background-color: #161922;
   height: 60px;
@@ -44,15 +38,6 @@ const FooterContainer = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-`;
-
-const ArrowLine = styled.a`
-  color: ${({ color }) => (color ? "#" + color : "#fff")};
-  font-weight: ${({ weight }) => (weight ? weight : "400")};
-  font-size: ${({ font }) => (font ? font + "px" : "16px")};
-  transform: ${({ transform }) =>
-    transform ? "rotate(" + transform + "deg)" : "rotate(0deg)"};
-  cursor: pointer;
 `;
 function ContactPage() {
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
@@ -71,47 +56,14 @@ function ContactPage() {
   return (
     <PageContainer id="contact">
       <ContactPageContainer>
-        <UpperContainer>
-          <TextContainer pleft={isMobile ? 50 : ""}>
-            <Description
-              init={{ x: "-20px", opacity: 0 }}
-              trans={{ duration: 1 }}
-              font={21.5}
-              weight={400}
-              color={"8B8EB3"}
-              opacity={1}
-            >
-              {t("contactSlogan")}
-              <Description
-                init={{ x: "-20px", opacity: 0 }}
-                trans={{ duration: 1 }}
-                font={22}
-                weight={400}
-                color={"fdcd73"}
-                opacity={1}
-              >
-                {t("sayHello")}
-              </Description>
-            </Description>
-          </TextContainer>
-          {!isMobile && (
-            <ArrowLine
-              transform={isMobile ? 90 : ""}
-              font={25}
-              weight={400}
-              color={"fdcd73"}
-            >
-              ────
-            </ArrowLine>
-          )}
-        </UpperContainer>
+        <UpperContainer></UpperContainer>
         <ContactFormCard />
         <BottomContainer isMobile={isMobile} />
         <FooterContainer>
           <Description font={isMobile ? 12 : ""} color={"fff"}>
-          {t("firstname")} {t("lastname")} 
+            {t("firstname")} {t("lastname")}
             <Description color={"FDCD73"} font={12}>
-               &copy; {new Date().getFullYear()}
+              &copy; {new Date().getFullYear()}
             </Description>
           </Description>
         </FooterContainer>
