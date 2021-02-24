@@ -27,6 +27,7 @@ const PageContainer = styled.div`
 const HomePageContainer = styled.div`
   display: flex;
   height: 100%;
+  padding: ${({ padding }) => (padding ? "0 "+padding + "px" : "0 250px")};
   padding-left: ${({ pleft }) => (pleft ? pleft + "px" : "250px")};
   align-items: flex-start;
   flex-direction: column;

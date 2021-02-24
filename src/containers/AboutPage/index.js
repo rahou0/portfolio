@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 
 const PageContainer = styled.div`
   width: 100vw;
-  min-height: 100vh;
+  min-height: 120vh;
   max-width: 100%;
   background-color: #161922;
 `;
@@ -58,7 +58,6 @@ const BottomContainer = styled.div`
   flex-direction: ${({ direction }) => (direction ? direction : "row")};
   align-items: flex-start;
   height: 100%;
-  margin-right: ${({ mright }) => (mright ? mright + "px" : "400px")};
   margin-bottom: ${({ mbottom }) => (mbottom ? mbottom + "px" : "0px")};
   justify-content: space-around;
 `;
@@ -73,6 +72,9 @@ const SkillsName = styled.h4`
   opacity: 0.85;
   line-height: 0.1;
   cursor: pointer;
+`;
+const SkillTitleContainer=styled.div`
+min-width:200px;
 `;
 function AboutPage() {
   const { t, i18n } = useTranslation();
@@ -91,8 +93,8 @@ function AboutPage() {
   return (
     <PageContainer id="about">
       <AboutPageContainer
-        pleft={isMobile ? 30 : 250}
-        pright={isMobile ? 30 : 0}
+        pleft={isMobile ? 30 : 200}
+        pright={isMobile ? 30 : 250}
       >
         <UpperContainer>
           {!isMobile && (
@@ -102,18 +104,12 @@ function AboutPage() {
           )}
           {!isMobile && <Marginer direction="horizontal" margin={100} />}
           <TextContentContainer>
-            <PageTitle font={isMobile ? 25 : 30}>
-              ─ {t("aboutTitle")}
-            </PageTitle>
+            <PageTitle font={isMobile ? 25 : 30}>─ {t("aboutTitle")}</PageTitle>
             <Marginer direction="vertical" margin={isMobile ? 15 : 30} />
-            <Description color={"8B8EB3"}>
-              {t("AboutDescriptionP1")}
-            </Description>
+            <Description color={"fff"}>{t("AboutDescriptionP1")}</Description>
             <Marginer direction="vertical" margin={isMobile ? 15 : 35} />
 
-            <Description color={"8B8EB3"}>
-              {t("AboutDescriptionP2")}
-            </Description>
+            <Description color={"fff"}>{t("AboutDescriptionP2")}</Description>
             <Marginer direction="vertical" margin={isMobile ? 35 : 70} />
             <ButtonContainer>
               <Button padding={"10px 15px"} width={100} font={14} weight={500}>
@@ -127,11 +123,10 @@ function AboutPage() {
           </TextContentContainer>
         </UpperContainer>
         <Marginer direction="vertical" margin={isMobile ? 60 : 100} />
+
         <BottomContainer
-          mright={isMobile ? 1 : 400}
           direction={isMobile ? "column" : "row"}
           mbottom={isMobile ? 50 : 1}
-          mleft={isMobile ? 50 : 1}
         >
           <SkillsTitle
             trans={isMobile ? 1 : 90}

@@ -7,7 +7,7 @@ import PageTitle from "../PageTitle";
 import Description from "../Description";
 
 const Container = styled(motion.div)`
-  width: 250px;
+  width: 31.3%;
   height: 250px;
   position: relative;
   background-color: #191d28;
@@ -16,7 +16,7 @@ const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  margin: 10px 10px;
+  margin: 1% 1%;
 `;
 const ImageContainer = styled(motion.div)`
   width: 100%;
@@ -29,13 +29,9 @@ const ImageContainer = styled(motion.div)`
   }
 `;
 const itemVariants = {
-  visible: { y: 0, opacity: 1,transition: { duration: 0.7 } },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.7 } },
   hidden: { y: "150px", opcity: 0 },
 };
-const Title = styled.a`
-  font-size: 20px;
-  color: #fdd68c;
-`;
 const titleVariants = {
   hidden: { y: "30px", opacity: 0 },
   visible: { y: 0, opacity: 0.7 },
@@ -61,8 +57,6 @@ function Card({ image, alt }) {
   useEffect(() => {
     if (inView) controls.start("visible");
   }, [controls, inView]);
-  console.log(isHovred);
-
   return (
     <Container
       onMouseEnter={() => setHovred(true)}

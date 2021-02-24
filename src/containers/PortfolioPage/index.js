@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/Button";
@@ -22,7 +22,7 @@ const PortfolioPageContainer = styled.div`
   display: flex;
   height: 100%;
   padding: ${({ padding }) =>
-    padding ? "50px " + padding + "px" : "50px 230px"};
+    padding ? "50px " + padding + "px" : "50px 10%"};
   flex-direction: column;
   align-items: center;
 `;
@@ -37,15 +37,63 @@ const CardWorkContainer = styled.div`
   justify-content: ${({ justify }) => (justify ? justify : "start")};
 `;
 const LinkItem = styled.a`
+  padding: 10px 20px;
   color: ${({ color }) => (color ? "#" + color : "#fff")};
   font-weight: ${({ weight }) => (weight ? weight : "500")};
   font-size: ${({ font }) => (font ? font + "px" : "16px")};
   cursor: pointer;
+
+  display: block;
+  background: linear-gradient(to right, #fdcd73 50%, #191d28 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease-out;
+  &:hover {
+    background-position: left bottom;
+    color: #191d28;
+  }
 `;
+const Data = [
+  {
+    url: WebImage,
+    alt: "bla bla bla blla",
+  },
+  {
+    url: MobileImage,
+    alt: "bla bla bla blla",
+  },
+  {
+    url: WebImage,
+    alt: "bla bla bla blla",
+  },
+  {
+    url: MobileImage,
+    alt: "bla bla bla blla",
+  },
+  {
+    url: WebImage,
+    alt: "bla bla bla blla",
+  },
+  {
+    url: MobileImage,
+    alt: "bla bla bla blla",
+  },
+  {
+    url: WebImage,
+    alt: "bla bla bla blla",
+  },
+];
+
 function PortfolioPage() {
   const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
   const location = useLocation();
+  const [item, setItem] = useState("all");
+  const changeItem = (name) => {
+    return () => {
+      setItem(name);
+    };
+  };
   useEffect(() => {
     if (location.hash) {
       let elem = document.getElementById(location.hash.slice(1));
@@ -64,23 +112,36 @@ function PortfolioPage() {
         <Description>{t("portfolioDescription")} </Description>
         <Marginer direction="vertical" margin={40} />
         <HeaderContainer>
-          <LinkItem color={"FDCD73"}>{t("all")}</LinkItem>
-          <LinkItem style={{ cursor: "pointer" }}>{t("web")}</LinkItem>
-          <LinkItem>{t("desktop")}</LinkItem>
-          <LinkItem>{t("mobile")}</LinkItem>
+          <LinkItem
+            onClick={changeItem("all")}
+            color={item === "all" ? "FDCD73" : "fff"}
+          >
+            {t("all")}
+          </LinkItem>
+          <LinkItem
+            onClick={changeItem("web")}
+            color={item === "web" ? "FDCD73" : "fff"}
+          >
+            {t("web")}
+          </LinkItem>
+          <LinkItem
+            color={item === "desktop" ? "FDCD73" : "fff"}
+            onClick={changeItem("desktop")}
+          >
+            {t("desktop")}
+          </LinkItem>
+          <LinkItem
+            color={item === "mobile" ? "FDCD73" : "fff"}
+            onClick={changeItem("mobile")}
+          >
+            {t("mobile")}
+          </LinkItem>
         </HeaderContainer>
         <Marginer direction="vertical" margin={40} />
         <CardWorkContainer justify={isMobile ? "center" : "start"}>
-          <Card image={WebImage} alt="bla bla bla" />
-          <Card image={MobileImage} alt="bla bla bla" />
-          <Card image={WebImage} alt="bla bla bla" />
-          <Card image={MobileImage} alt="bla bla bla" />
-          <Card image={WebImage} alt="bla bla bla" />
-          <Card image={MobileImage} alt="bla bla bla" />
-          <Card image={WebImage} alt="bla bla bla" />
-          <Card image={MobileImage} alt="bla bla bla" />
-          <Card image={WebImage} alt="bla bla bla" />
-          <Card image={MobileImage} alt="bla bla bla" />
+          {Data.map((data, index) => {
+            return <Card key={index} image={data.url} alt={data.alt} />;
+          })}
         </CardWorkContainer>
         <Marginer direction="vertical" margin={40} />
 
