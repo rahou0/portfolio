@@ -56,7 +56,7 @@ function HomePage() {
   const { t, i18n } = useTranslation();
   return (
     <PageContainer>
-      <HomePageContainer padding={isMobile ? 40 : 250}>
+      <HomePageContainer padding={isMobile ? 20 : 250}>
         <HelloContainer>
           <PageTitle
             trans={{ duration: 1, delay: 0.5 }}
@@ -70,7 +70,7 @@ function HomePage() {
           <PageTitle
             trans={{ duration: 1, delay: 0.5 }}
             init={{ y: "-20vh", opacity: 0 }}
-            font={16}
+            font={15}
             weight={500}
             color={"FDCD73"}
           >
@@ -79,7 +79,7 @@ function HomePage() {
         </HelloContainer>
         <TitleContainer>
           <PageTitle
-            font={isMobile ? 25 : 60}
+            font={isMobile ? 16 : 60}
             color={"fff"}
             init={{ y: "30vh", opacity: 0 }}
             trans={{ duration: 1, delay: 1.5 }}
@@ -89,14 +89,14 @@ function HomePage() {
           <PageTitle
             init={{ y: "30vh", opacity: 0 }}
             trans={{ duration: 1, delay: 1.5 }}
-            font={isMobile ? 25 : 60}
+            font={isMobile ? 16 : 60}
           >
             {t("firstname")}
           </PageTitle>
           <PageTitle
             init={{ y: "30vh", opacity: 0 }}
             trans={{ duration: 1, delay: 1.5 }}
-            font={isMobile ? 25 : 60}
+            font={isMobile ? 16 : 60}
             color={"fff"}
           >
             {t("lastname")}
@@ -104,7 +104,7 @@ function HomePage() {
         </TitleContainer>
         <PageTitle
           color={"fff"}
-          font={isMobile ? 21.5 : 49.5}
+          font={isMobile ? 16 : 49.5}
           weight={400}
           init={{ y: "-6vh", opacity: 0 }}
           trans={{ duration: 0.5, delay: 2.3 }}

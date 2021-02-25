@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Description from "../../components/Description";
 import PageTitle from "../../components/PageTitle";
 import { Marginer } from "../../components/marginer";
-
+import { useMediaQuery } from "react-responsive";
+import { deviceSize } from "../../components/responsive";
 const PageContainer = styled.div`
   width: 100vw;
   background-color: #191d28;

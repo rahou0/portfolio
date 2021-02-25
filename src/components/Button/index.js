@@ -26,9 +26,6 @@ const ButtonWrapper = styled(motion.div)`
   &:focus {
     outline: none;
   }
-  &:hover {
-    
-  }
 `;
 function Button(props) {
   const { width, padding, font, weight, radius, init, trans } = props;
