@@ -21,8 +21,6 @@ const AboutPageContainer = styled.div`
   height: 100%;
   padding: 0 10%;
   padding-top: 50px;
-  /* padding-left: ${({ pleft }) => (pleft ? pleft + "px" : "1%")};
-  padding-right: ${({ pright }) => (pright ? pright + "px" : "0px")}; */
   flex-direction: column;
 `;
 const SkillsTitle = styled.a`
@@ -45,7 +43,10 @@ const ProfileContainer = styled.div`
 const TextContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
+  @media (max-width: 992px) {
+    width: 100%;
+  }
   text-align: justify;
   text-justify: inter-word;
 `;

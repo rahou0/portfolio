@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Button from "../../components/Button";
 import PageTitle from "../PageTitle";
 import Description from "../Description";
+import { Link } from "react-router-dom";
 
 const Container = styled(motion.div)`
   width: 31.3%;
@@ -17,7 +17,6 @@ const Container = styled(motion.div)`
     width: 50%;
     height: 200px;
   }
-
   position: relative;
   background-color: #191d28;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16), 0 4px 8px rgba(0, 0, 0, 0.23);
@@ -37,6 +36,7 @@ const ImageContainer = styled(motion.div)`
     height: 100%;
   }
 `;
+
 const itemVariants = {
   visible: { y: 0, opacity: 1, transition: { duration: 0.7 } },
   hidden: { y: "150px", opcity: 0 },
@@ -47,6 +47,7 @@ const titleVariants = {
 };
 const DescriptionContainer = styled(motion.div)`
   z-index: 1;
+  padding-top: 5px;
   position: absolute;
   width: 100%;
   pointer-events: none;
@@ -58,11 +59,32 @@ const DescriptionContainer = styled(motion.div)`
   padding-left: 10px;
   bottom: 0;
 `;
+const LinkWrapper = styled.a`
+  padding: 5px 10px;
+  background-color: transparent;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 2px solid #fdd68c;
 
+  &:hover {
+    text-decoration: underline;
+    color: red;
+  }
+`;
+const WrapperContainer = styled.div`
+  display: flex;
+  width: 92%;
+  justify-content: flex-end;
+`;
 function Card({ image, alt }) {
   const [isHovred, setHovred] = useState(false);
   const controls = useAnimation();
   const { ref, inView } = useInView();
+  const changeItem = () => {
+    console.log("hello");
+  };
   useEffect(() => {
     if (inView) controls.start("visible");
   }, [controls, inView]);
@@ -85,7 +107,7 @@ function Card({ image, alt }) {
           <PageTitle
             init={{ y: "30px", opacity: 0 }}
             trans={{ duration: 0.7, delay: 0.2 }}
-            font={21.5}
+            font={18}
             color={"fff"}
           >
             Xmas Gift
@@ -97,6 +119,15 @@ function Card({ image, alt }) {
           >
             React JS / Node.js
           </Description>
+          <WrapperContainer>
+            <LinkWrapper
+              onClick={changeItem}
+              href={"/google.com"}
+              target="_blank"
+            >
+              VIEW SITE
+            </LinkWrapper>
+          </WrapperContainer>
         </DescriptionContainer>
       )}
       <ImageContainer

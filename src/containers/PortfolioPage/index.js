@@ -11,7 +11,8 @@ import MobileImage from "../../images/web.jpg";
 import { deviceSize } from "../../components/responsive";
 import { useMediaQuery } from "react-responsive";
 import { useTranslation } from "react-i18next";
-
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 const PageContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
@@ -52,6 +53,17 @@ const LinkItem = styled.a`
     background-position: left bottom;
     color: #191d28;
   }
+`;
+const itemVariants = {
+  visible: {
+    opacity: 1,
+  },
+  hidden: { opacity: 0 },
+};
+const AnimationContainer = styled(motion.div)`
+  display: flex;
+  width: 100%;
+  justify-content: center;
 `;
 const Data = [
   {
@@ -94,6 +106,11 @@ function PortfolioPage() {
       setItem(name);
     };
   };
+  const controls = useAnimation();
+  const { ref, inView } = useInView();
+  useEffect(() => {
+    if (inView) controls.start("visible");
+  }, [controls, inView]);
   useEffect(() => {
     if (location.hash) {
       let elem = document.getElementById(location.hash.slice(1));
@@ -104,6 +121,7 @@ function PortfolioPage() {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   }, [location]);
+
   return (
     <PageContainer id="portfolio">
       <PortfolioPageContainer padding={isMobile ? " 1" : ""}>
@@ -111,7 +129,8 @@ function PortfolioPage() {
         <Marginer direction="vertical" margin={5} />
         <Description>{t("portfolioDescription")} </Description>
         <Marginer direction="vertical" margin={40} />
-        <HeaderContainer>
+        <HeaderContainer
+        >
           <LinkItem
             onClick={changeItem("all")}
             color={item === "all" ? "FDCD73" : "fff"}
@@ -147,10 +166,18 @@ function PortfolioPage() {
           })}
         </CardWorkContainer>
         <Marginer direction="vertical" margin={40} />
-
-        <Button weight={600} font={16}>
-          {t("seeMore")}
-        </Button>
+        <AnimationContainer
+          animate={controls}
+          ref={ref}
+          initial="hidden"
+          animate={controls}
+          variants={itemVariants}
+          transition={{ duration: 1 }}
+        >
+          <Button weight={600} font={16}>
+            {t("seeMore")}
+          </Button>
+        </AnimationContainer>
       </PortfolioPageContainer>
     </PageContainer>
   );

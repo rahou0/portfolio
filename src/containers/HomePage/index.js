@@ -51,6 +51,7 @@ const IconContainer = styled(motion.div)`
   right: ${({ lang }) => (lang === "ar" ? 1 : 100)};
   left: ${({ lang }) => (lang === "ar" ? 100 : 0)};
 `;
+
 function HomePage() {
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
   const isTablet = useMediaQuery({ maxWidth: deviceSize.tablet });
@@ -80,7 +81,7 @@ function HomePage() {
         </HelloContainer>
         <TitleContainer>
           <PageTitle
-            font={isMobile ? 26 : isTablet?45:60}
+            font={isMobile ? 26 : isTablet ? 45 : 60}
             color={"fff"}
             init={{ y: "30vh", opacity: 0 }}
             trans={{ duration: 1, delay: 1.5 }}
@@ -89,7 +90,7 @@ function HomePage() {
             <PageTitle
               init={{ y: "30vh", opacity: 0 }}
               trans={{ duration: 1, delay: 1.5 }}
-              font={isMobile ? 26 : isTablet?45:60}
+              font={isMobile ? 26 : isTablet ? 45 : 60}
             >
               {t("firstname")}
             </PageTitle>
@@ -98,7 +99,7 @@ function HomePage() {
         </TitleContainer>
         <PageTitle
           color={"fff"}
-          font={isMobile ? 22 : isTablet?35:49.5}
+          font={isMobile ? 22 : isTablet ? 35 : 49.5}
           weight={400}
           init={{ y: "-6vh", opacity: 0 }}
           trans={{ duration: 0.5, delay: 2.3 }}
