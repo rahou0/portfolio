@@ -19,14 +19,14 @@ const PageContainer = styled.div`
 const AboutPageContainer = styled.div`
   display: flex;
   height: 100%;
+  padding: 0 10%;
   padding-top: 50px;
-  padding-left: ${({ pleft }) => (pleft ? pleft + "px" : "250px")};
-  padding-right: ${({ pright }) => (pright ? pright + "px" : "0px")};
+  /* padding-left: ${({ pleft }) => (pleft ? pleft + "px" : "1%")};
+  padding-right: ${({ pright }) => (pright ? pright + "px" : "0px")}; */
   flex-direction: column;
 `;
-const SkillsTitle = styled.h2`
-  font-size: ${({ font }) => (font ? font + "px" : "30px")};
-  line-height: 0;
+const SkillsTitle = styled.a`
+  font-size: ${({ font }) => (font ? font + "px" : "36px")};
   font-weight: 700;
   color: ${({ color }) => (color ? "#" + color : "#FDCD73")};
   transform: ${({ trans }) =>
@@ -45,13 +45,18 @@ const ProfileContainer = styled.div`
 const TextContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 100%;
+  text-align: justify;
+  text-justify: inter-word;
 `;
 const ButtonContainer = styled.div`
   display: flex;
 `;
 const UpperContainer = styled.div`
   display: flex;
+  margin-top: 60px;
+  justify-content: center;
+  align-items: center;
 `;
 const BottomContainer = styled.div`
   display: flex;
@@ -66,15 +71,15 @@ const SkillsContainer = styled.div`
   flex-direction: column;
   height: 100%;
 `;
-const SkillsName = styled.h4`
-  font-size: 16px;
+const SkillsName = styled.a`
+  font-size: 18px;
   color: ${({ color }) => (color ? "#" + color : "#fff")};
+  font-weight: 600;
   opacity: 0.85;
-  line-height: 0.1;
   cursor: pointer;
 `;
-const SkillTitleContainer=styled.div`
-min-width:200px;
+const SkillTitleContainer = styled.div`
+  min-width: 200px;
 `;
 function AboutPage() {
   const { t, i18n } = useTranslation();
@@ -117,7 +122,7 @@ function AboutPage() {
               </Button>
               <Marginer direction="horizontal" margin={40} />
               <Button padding={"10px 15px"} width={100} font={14} weight={900}>
-                ⟶
+                {t("downloadcv")}
               </Button>
             </ButtonContainer>
           </TextContentContainer>
@@ -136,19 +141,31 @@ function AboutPage() {
           >
             ── {t("skillsTitle")}
           </SkillsTitle>
+          {isMobile && <Marginer direction="vertical" margin={20} />}
+
           <SkillsContainer>
             <SkillsName>{t("skill1Name")}</SkillsName>
+            {isMobile && <Marginer direction="vertical" margin={5} />}
             <Description color={"FDCD73"}>{t("skill1Description")}</Description>
-            <Marginer direction="vertical" margin={isMobile ? 10 : 40} />
+            <Marginer direction="vertical" margin={isMobile ? 15 : 40} />
             <SkillsName>{t("skill2Name")}</SkillsName>
+            {isMobile && <Marginer direction="vertical" margin={5} />}
+
             <Description color={"FDCD73"}>{t("skill2Description")}</Description>
           </SkillsContainer>
-          <Marginer direction="horizontal" margin={isMobile ? 1 : 200} />
+          <Marginer
+            direction={isMobile ? "vertical" : "horizontal"}
+            margin={isMobile ? 15 : 200}
+          />
           <SkillsContainer>
             <SkillsName>{t("skill3Name")}</SkillsName>
+            {isMobile && <Marginer direction="vertical" margin={5} />}
+
             <Description color={"FDCD73"}>{t("skill3Description")}</Description>
-            <Marginer direction="vertical" margin={isMobile ? 10 : 40} />
+            <Marginer direction="vertical" margin={isMobile ? 15 : 40} />
             <SkillsName>{t("skill4Name")}</SkillsName>
+            {isMobile && <Marginer direction="vertical" margin={5} />}
+
             <Description color={"FDCD73"}>{t("skill4Description")}</Description>
           </SkillsContainer>
         </BottomContainer>

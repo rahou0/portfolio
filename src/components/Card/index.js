@@ -9,6 +9,15 @@ import Description from "../Description";
 const Container = styled(motion.div)`
   width: 31.3%;
   height: 250px;
+  @media (max-width: 992px) {
+    width: 48%;
+    height: 200px;
+  }
+  @media (max-width: 772px) {
+    width: 50%;
+    height: 200px;
+  }
+
   position: relative;
   background-color: #191d28;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16), 0 4px 8px rgba(0, 0, 0, 0.23);

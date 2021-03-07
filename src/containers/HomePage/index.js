@@ -26,7 +26,7 @@ const PageContainer = styled.div`
 const HomePageContainer = styled.div`
   display: flex;
   height: 100%;
-  padding: ${({ padding }) => (padding ? "0 " + padding + "px" : "0 250px")};
+  padding: ${({ padding }) => (padding ? "0 4%" : "0 10%")};
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
@@ -53,10 +53,11 @@ const IconContainer = styled(motion.div)`
 `;
 function HomePage() {
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
+  const isTablet = useMediaQuery({ maxWidth: deviceSize.tablet });
   const { t, i18n } = useTranslation();
   return (
     <PageContainer>
-      <HomePageContainer padding={isMobile ? 20 : 250}>
+      <HomePageContainer padding={isMobile}>
         <HelloContainer>
           <PageTitle
             trans={{ duration: 1, delay: 0.5 }}
@@ -79,32 +80,25 @@ function HomePage() {
         </HelloContainer>
         <TitleContainer>
           <PageTitle
-            font={isMobile ? 16 : 60}
+            font={isMobile ? 26 : isTablet?45:60}
             color={"fff"}
             init={{ y: "30vh", opacity: 0 }}
             trans={{ duration: 1, delay: 1.5 }}
           >
-            {t("im")}
-          </PageTitle>
-          <PageTitle
-            init={{ y: "30vh", opacity: 0 }}
-            trans={{ duration: 1, delay: 1.5 }}
-            font={isMobile ? 16 : 60}
-          >
-            {t("firstname")}
-          </PageTitle>
-          <PageTitle
-            init={{ y: "30vh", opacity: 0 }}
-            trans={{ duration: 1, delay: 1.5 }}
-            font={isMobile ? 16 : 60}
-            color={"fff"}
-          >
+            {t("im")}{" "}
+            <PageTitle
+              init={{ y: "30vh", opacity: 0 }}
+              trans={{ duration: 1, delay: 1.5 }}
+              font={isMobile ? 26 : isTablet?45:60}
+            >
+              {t("firstname")}
+            </PageTitle>
             {t("lastname")}
           </PageTitle>
         </TitleContainer>
         <PageTitle
           color={"fff"}
-          font={isMobile ? 16 : 49.5}
+          font={isMobile ? 22 : isTablet?35:49.5}
           weight={400}
           init={{ y: "-6vh", opacity: 0 }}
           trans={{ duration: 0.5, delay: 2.3 }}

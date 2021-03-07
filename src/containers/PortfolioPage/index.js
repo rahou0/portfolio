@@ -37,7 +37,7 @@ const CardWorkContainer = styled.div`
   justify-content: ${({ justify }) => (justify ? justify : "start")};
 `;
 const LinkItem = styled.a`
-  padding: 10px 20px;
+  padding: 5px 20px;
   color: ${({ color }) => (color ? "#" + color : "#fff")};
   font-weight: ${({ weight }) => (weight ? weight : "500")};
   font-size: ${({ font }) => (font ? font + "px" : "16px")};
@@ -121,18 +121,21 @@ function PortfolioPage() {
           <LinkItem
             onClick={changeItem("web")}
             color={item === "web" ? "FDCD73" : "fff"}
+            font={isMobile ? 13 : null}
           >
             {t("web")}
           </LinkItem>
           <LinkItem
             color={item === "desktop" ? "FDCD73" : "fff"}
             onClick={changeItem("desktop")}
+            font={isMobile ? 13 : null}
           >
             {t("desktop")}
           </LinkItem>
           <LinkItem
             color={item === "mobile" ? "FDCD73" : "fff"}
             onClick={changeItem("mobile")}
+            font={isMobile ? 13 : null}
           >
             {t("mobile")}
           </LinkItem>

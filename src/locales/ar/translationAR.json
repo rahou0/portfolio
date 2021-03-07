@@ -35,9 +35,10 @@
         "contactEmail":"بريدك الإلكتروني",
         "contactBudget":"ميزانيتك (ليست إجبارية)",
         "contactDescription":"وصف المشروع",
-        "home":"HOME",
+        "home":"الرئيسية",
         "about":"من أنا؟",
         "portfolio":"أعمالي",
         "blog":"مقالاتي",
-        "contact":"CONTACT"
+        "contact":"تواصل معي",
+        "downloadcv":"حمل سيرتي"
     }

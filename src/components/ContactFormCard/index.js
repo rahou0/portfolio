@@ -13,8 +13,9 @@ const Card = styled(motion.div)`
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16), 0 8px 16px rgba(0, 0, 0, 0.23);
   background-color: #191d28;
   position: ${({ position }) => (position ? position : "absolute")};
+  right: ${({ right }) => (right ? null : 0)};
+  left: ${({ left }) => (left ? 0 : null)};
   bottom: 0;
-  right: 0;
   min-width: 250px;
   height: 300px;
   margin: 100px 250px;
@@ -90,6 +91,8 @@ function ContactFormCard() {
 
   return (
     <Card
+    right={i18n.language==="ar"}
+    left={i18n.language==="ar"}
       position={isMobile ? "relative" : ""}
       animate={controls}
       ref={ref}
