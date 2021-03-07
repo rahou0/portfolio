@@ -47,6 +47,9 @@ const CardTitle = styled.h3`
   font-size: ${({ font }) => (font ? font + "px" : "20px")};
   padding: 0 20px;
   cursor: pointer;
+  &:hover {
+    color: #fdcd73;
+  }
 `;
 const Text = styled.a`
   color: #727796;
