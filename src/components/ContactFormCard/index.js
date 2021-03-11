@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { deviceSize } from "../../components/responsive";
@@ -6,6 +6,7 @@ import Button from "../Button";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const Card = styled(motion.div)`
   display: flex;
@@ -18,12 +19,11 @@ const Card = styled(motion.div)`
   bottom: 0;
   min-width: 250px;
   height: 300px;
-  margin: 100px 250px;
+  margin: ${({ margin }) => (margin ? "50px 10%" : "100px 10%")};
   padding: 50px 50px;
   textarea {
     width: 100%;
     height: 70px;
-    margin-bottom: 30px;
     text-decoration: none;
     background-color: #191d28;
     border: none;
@@ -44,7 +44,6 @@ const Card = styled(motion.div)`
   input {
     width: 100%;
     height: 30px;
-    margin-bottom: 20px;
     background-color: #191d28;
     text-decoration: none;
     border: none;
@@ -68,6 +67,22 @@ const ButtonContainer = styled.div`
   width: 100%;
   justify-content: flex-end;
 `;
+const WarnignText = styled.span`
+  color: red;
+  font-size: 12px;
+  opacity: 0.8;
+  font-weight: 500;
+`;
+const WarningContainer = styled.div`
+  width: 100%;
+  text-align: end;
+  padding: 5px 0;
+`;
+const WarningContainerRegistre = styled.div`
+  width: 100%;
+  text-align: center;
+  padding-top: 12px;
+`;
 const itemVariants = {
   visible: {
     opacity: 1,
@@ -83,22 +98,92 @@ function ContactFormCard() {
   const { t, i18n } = useTranslation();
 
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
+  const [errors, setErrors] = useState({
+    name: { value: false, msg: "" },
+    email: { value: false, msg: "" },
+    project: { value: false, msg: "" },
+    request: { value: false, msg: "" },
+  });
+  const [name, setName] = useState("");
+  const [project, setProject] = useState("");
+  const [email, setEmail] = useState("");
+  const [budget, setBudget] = useState("");
   const controls = useAnimation();
   const { ref, inView } = useInView();
   useEffect(() => {
     if (inView) controls.start("visible");
   }, [controls, inView]);
-
+  function CheckInputs() {
+    if (name === "") {
+      setErrors((prevState) => ({
+        ...prevState,
+        name: { value: true, msg: "This Field is Empty" },
+      }));
+    }
+    if (email === "") {
+      setErrors((prevState) => ({
+        ...prevState,
+        email: { value: true, msg: "This Field is Empty" },
+      }));
+    } else {
+      if (!/.+@.+\.[A-Za-z]+$/.test(email))
+        setErrors((prevState) => ({
+          ...prevState,
+          email: { value: true, msg: "Email Invalid!" },
+        }));
+    }
+    if (project === "") {
+      setErrors((prevState) => ({
+        ...prevState,
+        project: { value: true, msg: "This Field is Empty" },
+      }));
+    }
+  }
+  function handleClick(e) {
+    CheckInputs();
+    if (
+      name !== "" &&
+      email !== "" &&
+      project !== "" &&
+      /.+@.+\.[A-Za-z]+$/.test(email) &&
+      /^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]+$/.test(name)
+    )
+      axios
+        .post(
+          "http://192.168.1.3:4000/contact",
+          {
+            name,
+            email,
+            budget: budget || 0,
+            project,
+          },
+          {
+            headers: {
+              "Access-Control-Allow-Origin": true,
+            },
+          }
+        )
+        .then(function (response) {
+          console.log("sent");
+        })
+        .catch(function (error) {
+          setErrors((prevState) => ({
+            ...prevState,
+            request: { value: true, msg: error.response.data },
+          }));
+        });
+  }
   return (
     <Card
-    right={i18n.language==="ar"}
-    left={i18n.language==="ar"}
+      right={i18n.language === "ar"}
+      left={i18n.language === "ar"}
       position={isMobile ? "relative" : ""}
       animate={controls}
       ref={ref}
       initial="hidden"
       animate={controls}
       variants={itemVariants}
+      margin={isMobile}
     >
       <motion.input
         placeholder={t("contactName")}
@@ -106,7 +191,18 @@ function ContactFormCard() {
         animate="visible"
         variants={FormVariants}
         transition={{ duration: 1, delay: 0.2 }}
-      ></motion.input>
+        value={name}
+        onChange={(e) => {
+          setName(e.target.value);
+          setErrors((prevState) => ({
+            ...prevState,
+            name: { value: false, msg: "" },
+          }));
+        }}
+      />
+      <WarningContainer>
+        {errors.name.value && <WarnignText>{errors.name.msg}</WarnignText>}
+      </WarningContainer>
       <motion.input
         initial="hidden"
         animate="visible"
@@ -114,27 +210,59 @@ function ContactFormCard() {
         transition={{ duration: 1, delay: 0.4 }}
         type="email"
         placeholder={t("contactEmail")}
-      ></motion.input>
+        value={email}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          setErrors((prevState) => ({
+            ...prevState,
+            email: { value: false, msg: "" },
+          }));
+        }}
+      />
+      <WarningContainer>
+        {errors.email.value && <WarnignText>{errors.email.msg}</WarnignText>}{" "}
+      </WarningContainer>
       <motion.input
         initial="hidden"
         animate="visible"
         variants={FormVariants}
         transition={{ duration: 1, delay: 0.6 }}
         placeholder={t("contactBudget")}
-      ></motion.input>
+        value={budget}
+        onChange={(e) => {
+          setBudget(e.target.value);
+        }}
+      />
       <motion.textarea
         initial="hidden"
         animate="visible"
         variants={FormVariants}
         transition={{ duration: 1, delay: 0.8 }}
         placeholder={t("contactDescription")}
-      ></motion.textarea>
+        value={project}
+        onChange={(e) => {
+          setProject(e.target.value);
+          setErrors((prevState) => ({
+            ...prevState,
+            project: { value: false, msg: "" },
+          }));
+        }}
+      />
+      <WarningContainer>
+        <WarnignText>{errors.project.msg}</WarnignText>
+      </WarningContainer>
+      <WarningContainerRegistre>
+        {errors.request.value && (
+          <WarnignText>{errors.request.msg}</WarnignText>
+        )}
+      </WarningContainerRegistre>
       <ButtonContainer>
         <Button
           init={{ y: "30px", opacity: 0 }}
           trans={{ duration: 1, delay: 0.8 }}
-          padding={"10px 10px"}
+          padding={"7px 7px"}
           width={100}
+          onClick={handleClick}
           weight={500}
           font={14}
         >

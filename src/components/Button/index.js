@@ -28,7 +28,7 @@ const ButtonWrapper = styled(motion.div)`
   }
 `;
 function Button(props) {
-  const { width, padding, font, weight, radius, init, trans } = props;
+  const { width, padding, font, weight, radius, init, trans, onClick } = props;
   return (
     <ButtonWrapper
       padding={padding}
@@ -39,6 +39,7 @@ function Button(props) {
       initial={init}
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={trans}
+      onClick={onClick}
     >
       {props.children}
     </ButtonWrapper>

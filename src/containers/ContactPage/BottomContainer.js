@@ -33,7 +33,7 @@ const ContactInfoContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   padding: ${({ padding }) =>
-    padding ? "50px " + padding + "px" : "50px 230px"};
+    padding ? "50px " + padding + "px" : "50px 10%"};
 `;
 const itemVariants = {
   visible: {
@@ -66,7 +66,7 @@ function BottomContainer({ isMobile }) {
           </Description>
           <Marginer direction="horizontal" margin={10} />
           <Description font={16} weight={400} color={"fdcd73"}>
-            (+213) 657368220
+          213&nbsp;657368220
           </Description>
         </ContactRowContainer>
         <Marginer direction="vertical" margin={10} />
