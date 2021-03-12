@@ -21,7 +21,9 @@ const EducationPageContainer = styled.div`
 function EducationPage() {
   return (
     <PageContainer>
-      <EducationPageContainer></EducationPageContainer>
+      <EducationPageContainer>
+        <h1>Education Comming soon ....!</h1>
+      </EducationPageContainer>
     </PageContainer>
   );
 }
