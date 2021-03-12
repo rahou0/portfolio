@@ -24,7 +24,7 @@ function App() {
             <AboutPage />
             <PortfolioPage />
             <SayHelloPage />
-            <EducationPage />
+            {/* <EducationPage /> */}
             <BlogPage />
             <ContactPage />
           </Route>
